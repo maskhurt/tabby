@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tabby’s Hotel | Fresh Fish</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Nunito:wght@400;700;800&display=swap">
+<style>
+:root{--bg:#fffaf6;--bg2:#fff1ee;--card:#fff;--ink:#4a342f;--muted:#8c7771;--primary:#f4a7b6;--head:#c9516b;--gold:#b9780a;--line:#f6e3dd;--onp:#4a1f2a;--dark:#ffe9e2;--shadow:0 8px 22px rgba(200,120,110,.12);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:400 17px/1.55 Nunito,system-ui,sans-serif;background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%) fixed;min-height:100vh}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;margin:0;line-height:1.15}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+.strip{background:var(--dark);color:var(--ink);text-align:center;padding:9px 16px;font-size:.9rem;letter-spacing:.04em}
+.strip b{font-family:Fraunces,Georgia,serif;color:var(--gold);letter-spacing:.18em;font-size:1rem}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:var(--shadow);background:#fff}
+.call{color:var(--head);font-weight:800;text-decoration:none}
+.hero{text-align:center;padding:30px 0 34px}
+.hero h1{font-size:clamp(2.2rem,7vw,3.6rem);font-weight:800;color:var(--head)}
+.hero p{margin:12px 0 22px;color:var(--muted);font-size:1.1rem}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;font:800 1rem Nunito,sans-serif;text-decoration:none;border:0;cursor:pointer;background:var(--primary);color:var(--onp);box-shadow:var(--shadow)}
+.btn.gold{background:var(--gold);color:#2b1a17}
+.btn:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+h2{font-size:1.8rem;margin:10px 0 16px}
+.order{margin:20px 0 40px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:var(--shadow)}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:600px){.f{grid-template-columns:1fr}}
+input{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.full{grid-column:1/-1}
+.err{color:#c0392b;font-weight:700;min-height:1.4em;margin:8px 0}
+.send{width:100%;font-size:1.1rem}
+.brand{background:var(--dark);color:var(--ink);text-align:center;padding:34px 20px calc(34px + env(safe-area-inset-bottom,0px))}
+.brand .w{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:clamp(1.8rem,6vw,2.6rem);letter-spacing:.22em;color:var(--gold);margin:6px 0}
+.brand p{margin:4px 0;color:var(--muted)}
+.brand a{color:var(--gold);font-weight:800}
+</style>
+</head>
+<body>
+<div class="strip">Powered by <b>AFRICTECH</b></div>
+<div class="wrap">
+  <div class="top"><img class="logo" alt="Tabby’s" src="images/logo.jpg"><a class="call" href="tel:+254723053713">0723 053 713</a></div>
+  <div class="hero">
+    <h1>Fresh fish, made with love</h1>
+    <p>Tell us what you want and order in one tap.</p>
+    <a class="btn" href="#order">Order now</a>
+  </div>
+  <div class="order" id="order">
+    <h2>Place your order</h2>
+    <div class="f">
+      <input id="what" class="full" placeholder="What would you like to order?" aria-label="What would you like to order">
+      <input id="name" placeholder="Your name" aria-label="Your name" autocomplete="name">
+      <input id="phone" type="tel" placeholder="Your phone" aria-label="Your phone" autocomplete="tel">
+      <input id="addr" class="full" placeholder="Delivery location or “I will collect”" aria-label="Delivery location">
+      <input id="org" placeholder="Business or organisation name (optional)" aria-label="Business or organisation name" autocomplete="organization">
+      <input id="orgloc" placeholder="Business or organisation location (optional)" aria-label="Business or organisation location">
+    </div>
+    <p class="err" id="err" role="alert"></p>
+    <button class="btn send" id="wa">Send order on WhatsApp</button>
+  </div>
+</div>
+<footer class="brand">
+  <p>Website designed and powered by</p>
+  <div class="w">AFRICTECH</div>
+  <p>Tabby’s Hotel · Orders: <a href="tel:+254723053713">0723 053 713</a></p>
+</footer>
+<script>
+document.getElementById("wa").onclick=function(){
+  var err=document.getElementById("err");err.textContent="";
+  var w=document.getElementById("what").value.trim(),n=document.getElementById("name").value.trim(),p=document.getElementById("phone").value.trim(),a=document.getElementById("addr").value.trim();
+  if(!w||!n||!p||!a){err.textContent="Please fill in all the boxes.";return}
+  var L=["New order for Tabby’s","","Order: "+w,"","Name: "+n,"Phone: "+p,"Location: "+a];
+  var o=document.getElementById("org").value.trim(),ol=document.getElementById("orgloc").value.trim();
+  if(o)L.push("Business/Organisation: "+o);if(ol)L.push("Business location: "+ol);
+  window.open("https://wa.me/254723053713?text="+encodeURIComponent(L.join("\n")),"_blank");
+};
+</script>
+</body>
+</html>
